@@ -1,4 +1,4 @@
-cd ~/hima_meso/
+cd ${HOME}/hima_meso/
 pwd
 
 enable_vid=true

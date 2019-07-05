@@ -1,4 +1,4 @@
-cd ~/hima_full/
+cd ${HOME}/hima_full/
 pwd
 #date1=`date +'%Y%m%d'`
 #date2=`date +'%Y-%m-%d'`

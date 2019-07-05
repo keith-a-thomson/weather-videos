@@ -1,5 +1,5 @@
-mkdir -p ~/hima_meso
-cd ~/hima_meso
+mkdir -p ${HOME}/hima_meso
+cd ${HOME}/hima_meso
 
 enable_curl=true
 enable_vid=false

@@ -1,5 +1,5 @@
-mkdir -p ~/uk_rain
-cd ~/uk_rain
+mkdir -p ${HOME}/uk_rain
+cd ${HOME}/uk_rain
 
 base_url=https://max.nwstatic.co.uk/tiles3/
 

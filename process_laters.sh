@@ -1,4 +1,4 @@
-cd ~
+cd ${HOME}
 
 process_goes_16_meso_01=true
 process_goes_16_meso_02=true

@@ -14,8 +14,8 @@ then
 fi
 
 
-mkdir -p ~/${5}_meso_0${4}_ir
-cd ~/${5}_meso_0${4}_ir
+mkdir -p ${HOME}/${5}_meso_0${4}_ir
+cd ${HOME}/${5}_meso_0${4}_ir
 
 enable_curl=true
 enable_vid=false

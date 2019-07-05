@@ -1,4 +1,4 @@
-cd ~/hima_meso
+cd ${HOME}/hima_meso
 echo "Chopping"
 for i in ./*_raw.mp4;
 do

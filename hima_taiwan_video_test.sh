@@ -1,4 +1,4 @@
-cd ~/hima_taiwan/
+cd ${HOME}/hima_taiwan/
 pwd
 
 enable_vid=false

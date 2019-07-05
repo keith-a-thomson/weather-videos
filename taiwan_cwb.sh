@@ -1,12 +1,11 @@
-mkdir -p ~/taiwan_cwb/radar/
-mkdir -p ~/taiwan_cwb/temperature/
-mkdir -p ~/taiwan_cwb/precip1/
-mkdir -p ~/taiwan_cwb/precip2/
-mkdir -p ~/taiwan_cwb/precip_hour/
-#mkdir -p ~/taiwan_cwb/hima/
-mkdir -p ~/taiwan_cwb/himawari/
+mkdir -p ${HOME}/taiwan_cwb/radar/
+mkdir -p ${HOME}/taiwan_cwb/temperature/
+mkdir -p ${HOME}/taiwan_cwb/precip1/
+mkdir -p ${HOME}/taiwan_cwb/precip2/
+mkdir -p ${HOME}/taiwan_cwb/precip_hour/
+mkdir -p ${HOME}/taiwan_cwb/himawari/
 
-cd ~/taiwan_cwb/
+cd ${HOME}/taiwan_cwb/
 
 enable_curl=true
 enable_curl2=true

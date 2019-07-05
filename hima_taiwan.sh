@@ -1,5 +1,5 @@
-mkdir -p ~/hima_taiwan
-cd ~/hima_taiwan
+mkdir -p ${HOME}/hima_taiwan
+cd ${HOME}/hima_taiwan
 
 enable_curl=true
 base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/

@@ -1,4 +1,4 @@
-cd ~/uk_rain
+cd ${HOME}/uk_rain
 pwd
 
 enable_vid=true

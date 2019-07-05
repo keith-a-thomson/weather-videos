@@ -1,4 +1,4 @@
-cd ~/taiwan_cwb/
+cd ${HOME}/taiwan_cwb/
 
 #date1=`date +'%Y%m%d'`
 #date2=`date +'%Y-%m-%d'`

@@ -1,4 +1,4 @@
-cd ~
+cd ${HOME}
 
 process_hima_full=true
 process_hima_taiwan=true

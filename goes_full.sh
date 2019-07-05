@@ -4,8 +4,8 @@ then
 	exit 0
 fi
 
-mkdir -p ~/goes_${4}_full
-cd ~/goes_${4}_full
+mkdir -p ${HOME}/goes_${4}_full
+cd ${HOME}/goes_${4}_full
 
 enable_curl=true
 base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
