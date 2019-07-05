@@ -44,13 +44,6 @@ process_main.sh $1 $2 $3 hima_meso_01_ir
 wait
 upload.sh hm1ir $1 $2 $3 &
 
-#process_main.sh $1 $2 $3 hima_japan
-#wait
-#upload.sh hj $1 $2 $3 &
-
-#process_main.sh $1 $2 $3 hima_meso
-#wait
-#upload.sh hm $1 $2 $3 &
 goes_meso.sh   $1 $2 $3 2 16 &
 process_laters.sh $1 $2 $3 goes_16_meso_01
 wait
