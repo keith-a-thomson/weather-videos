@@ -10,7 +10,15 @@ echo ukr-$date2
 mkdir -p $date2
 
 cd $date2
+for hour in $(seq -w $4 $5)
+do
+	for min in {00..55..5}
+	do
+		mkdir -p $hour$min
+	done
+done
 
+rm -rf curl.exe.stackdump*
 for dir in *; do
 	files=`ls -1 ${dir}/ | wc -l`
 	if [ ! "$files" -eq "64" ]

@@ -24,13 +24,13 @@ curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs --show-er
 cd ..
 
 echo "Missing"
-uk_rain_missing.sh $1 $2 $3
+uk_rain_missing.sh $1 $2 $3 $4 $5
 cd $date2
 echo "Find"
 find  -type f -size -2k | xargs file | grep -v PNG 
 # cut -d ':' -f 1 | xargs -r rm
 cd ..
-uk_rain_missing.sh $1 $2 $3
+
 
 # Background image
 #mkdir -p osm
