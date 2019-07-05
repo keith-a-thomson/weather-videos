@@ -44,12 +44,12 @@ do
 	current_t=$(date -d "${current:0:8} ${current:8:4}" +'%s')
 	diff2=$(((current_t)-(previous_t)))
 
-        if [ ! $diff2 -eq 900 ];
+        if [ ! $diff2 -eq 600 ];
         then
                 if [ -d ../${previous_d}/${previous_i} ];
                 then
 			echo "Found missing - $diff $diff2 ${previous_i} $current"
-                        if [ $diff2 -eq 1800 ];
+                        if [ $diff2 -eq 1200 ];
                         then
                                 counter=$(printf %06d $xcount);
                                 for f in $current/*;
@@ -60,7 +60,7 @@ do
                                 xcount=$(($xcount+1));
                         fi
 
-                        if [ $diff2 -eq 2700 ];
+                        if [ $diff2 -eq 1800 ];
                         then
                                 counter=$(printf %06d $xcount);
                                 for f in $current/*;
@@ -78,7 +78,7 @@ do
                                 done
                                 xcount=$(($xcount+1));
                         fi
-                        if [ $diff2 -eq 3600 ];
+                        if [ $diff2 -eq 2400 ];
                         then
                                 counter=$(printf %06d $xcount);
                                 for f in $current/*;
@@ -96,7 +96,7 @@ do
                                 done
                                 xcount=$(($xcount+1));
 
-		                counter=$(printf %06d $xcount);
+                                counter=$(printf %06d $xcount);
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
