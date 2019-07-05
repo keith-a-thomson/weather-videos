@@ -12,9 +12,9 @@ mkdir -p $date2
 cd $date2
 
 for dir in *; do
-        files=`ls -1 ${dir}/ | wc -l`
-        if [ ! "$files" -eq "64" ]
-        then
+	files=`ls -1 ${dir}/ | wc -l`
+	if [ ! "$files" -eq "64" ]
+	then
 		echo $dir $files
 		for x in {59..66..1}
 		do

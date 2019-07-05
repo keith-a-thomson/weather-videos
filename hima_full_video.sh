@@ -83,10 +83,10 @@ do
                                 do
                                         fname=${f##*/}
                                         magick ../${previous_d}/${previous_i}/${fname} \
-						../${previous_d}/${previous_i}/${fname} \
-						../${previous_d}/${previous_i}/${fname} \
-						$f \
-						-evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                               ../${previous_d}/${previous_i}/${fname} \
+                                               ../${previous_d}/${previous_i}/${fname} \
+                                                $f \
+                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -115,11 +115,11 @@ do
                                 do
                                         fname=${f##*/}
                                         magick ../${previous_d}/${previous_i}/${fname} \
-                                                ../${previous_d}/${previous_i}/${fname} \
-                                                ../${previous_d}/${previous_i}/${fname} \
-                                                ../${previous_d}/${previous_i}/${fname} \
-                                                $f \
-                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                               ../${previous_d}/${previous_i}/${fname} \
+                                               ../${previous_d}/${previous_i}/${fname} \
+                                               ../${previous_d}/${previous_i}/${fname} \
+                                               $f \
+                                               -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
