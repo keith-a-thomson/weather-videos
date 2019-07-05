@@ -1,0 +1,1 @@
+ffmpeg.exe -i $1 -r 60 -filter:v "setpts=0.4*PTS"  -c:v libx264  -movflags +faststart  -level 4.0 -bf 2 -g 12 -coder 1 -crf 14 -pix_fmt yuv420p fps60_$1
