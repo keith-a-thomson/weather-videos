@@ -17,44 +17,46 @@ do
 	files=`ls -1 ${current}/ | wc -l`
 	if [ ! "$files" -eq "12" ];
 	then
-		continue
-	else
-		cd ${current}
-		b1=`identify -format "%[mean]" 000_000_1.png`
-		b2=`identify -format "%[mean]" 001_000_1.png`
-		b3=`identify -format "%[mean]" 000_001_1.png`
-		b4=`identify -format "%[mean]" 001_001_1.png`
-		btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
-		if (( btotal > 200 ));
+		if [ ! "$files" -eq "4" ];
 		then
-			# We have a non-black image
-			nonblack=$(($nonblack+1));
-			if [ "$inblack" = true ];
+			continue
+		fi
+	fi
+	cd ${current}
+	b1=`identify -format "%[mean]" 000_000_2.png`
+	b2=`identify -format "%[mean]" 001_000_2.png`
+	b3=`identify -format "%[mean]" 000_001_2.png`
+	b4=`identify -format "%[mean]" 001_001_2.png`
+	btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
+	if (( btotal > 200 ));
+	then
+		# We have a non-black image
+		nonblack=$(($nonblack+1));
+		if [ "$inblack" = true ];
+		then
+			# So we will start here if we reach 60 non-black images
+			start=${current}
+			inblack=false
+		fi
+		if (( nonblack > 60));
+		then
+			if [ ! "$start" = "" ];
 			then
-				# So we will start here if we reach 60 non-black images
-				start=${current}
-				inblack=false
-			fi
-			if (( nonblack > 60));
-			then
-				if [ ! "$start" = "" ];
-				then
-					echo ${start}
-					exit 0
-				fi
-			fi
-		else
-			# A black image
-			blackcount=$(($blackcount+1));
-			start=
-			nonblack=0
-			if (( blackcount > 60 ));
-			then
-				inblack=true
+				echo ${start}
+				exit 0
 			fi
 		fi
-		cd ..
+	else
+		# A black image
+		blackcount=$(($blackcount+1));
+		start=
+		nonblack=0
+		if (( blackcount > 60 ));
+		then
+			inblack=true
+		fi
 	fi
+	cd ..
 done
 cd ..
 

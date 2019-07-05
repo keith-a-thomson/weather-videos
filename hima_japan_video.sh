@@ -11,6 +11,7 @@ enable_vid=true
 enable_join=false
 time_diff=150
 time_tol=5
+enable_colour=false
 
 date=$1$2$3
 date_=$1-$2-$3
@@ -56,16 +57,19 @@ then
 		files=`ls -1 ${i}/ | wc -l`
 		if [ ! "$files" -eq "48" ];
 		then
-			continue
+			if [ ! "$files" -eq "16" ];
+			then
+				continue
+			fi
 		fi
 		
 		if (( xcount > 200 ));
 		then
 			# Stop if we hit blackness after min 200 frames - corners
-			b1=`identify -format "%[mean]" ${i}/000_001_1.png`
-			b2=`identify -format "%[mean]" ${i}/003_000_1.png`
-			b3=`identify -format "%[mean]" ${i}/000_003_1.png`
-			b4=`identify -format "%[mean]" ${i}/003_002_1.png`
+			b1=`identify -format "%[mean]" ${i}/000_001_3.png`
+			b2=`identify -format "%[mean]" ${i}/003_000_3.png`
+			b3=`identify -format "%[mean]" ${i}/000_003_3.png`
+			b4=`identify -format "%[mean]" ${i}/003_002_3.png`
 			wait
 			btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
 			if (( btotal < 200 ));
@@ -76,7 +80,7 @@ then
 			then
 				echo ${current} - 30 blacks detected - break
 				break
-			fi		
+			fi
 		fi
 		
 		rm -rf /tmp/${tmpname}_video/*	
@@ -89,13 +93,18 @@ then
 			for y in {000..003..1};
 			do
 				this=${x}_${y}
-				magick convert ${this}_3.png ${this}_2.png ${this}_1.png -combine PNG24:${this}.png &
+				if [ "$enable_colour" = true ];
+				then
+					magick convert ${this}_3.png ${this}_2.png ${this}_1.png -combine PNG24:${this}.png &
+				else
+					mv ${this}_3.png ${this}.png
+				fi
 			done
 		done
 		wait
-		rm *_1.png &
-		rm *_2.png &
-		rm *_3.png &
+		rm -rf *_1.png &
+		rm -rf *_2.png &
+		rm -rf *_3.png &
 		wait
 		
 		diff2=$(((current_t)-(previous_t)))
@@ -119,7 +128,7 @@ then
 					counter=$(printf %06d $xcount);
 					for f in ./*; do
 						fname=${f##*/}
-						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean ../${tmpname}_${counter}_${fname} &
+						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean -remap $f PNG8:../${tmpname}_${counter}_${fname} &
 					done
 					timefunc " ${current:0:4}-${current:4:2}-${current:6:2} ${current:8:2}:${current:10:2} UTC (Interpolate)\nHimawari Japan ${4}"
 					xcount=$(($xcount+1));
@@ -176,7 +185,7 @@ then
 							[8:v][9:v][10:v][11:v]vstack=inputs=4[row3];\
 							[12:v][13:v][14:v][15:v]vstack=inputs=4[row4];\
 							[row1][row2][row3][row4]hstack=inputs=4[join];\
-							[join]crop=2590:2060:302:480,unsharp[j];\
+							[join]crop=2590:2060:302:480,unsharp=5:5:0.2:5:5:0.0[j];\
 							[j][16:v]overlay[v]" \
 			-shortest \
 			-map "[v]" \
@@ -186,11 +195,3 @@ then
 			${date}_himawari_japan.mp4
 fi
 rm -rf /tmp/${tmpname}*
-
-#if [ "$enable_join" = true ]
-#then
-#	echo "file '${date}_himawari.mp4'" >> join.txt
-#	rm ../Himawari_Full_201712.mp4
-#	ffmpeg -f concat -safe 0 -i join.txt  -c copy ../Himawari_Full_201712.mp4
-#fi
-

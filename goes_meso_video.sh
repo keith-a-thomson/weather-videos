@@ -17,6 +17,7 @@ enable_vid=true
 enable_join=false
 time_diff=60
 time_tol=5
+enable_colour=false
 
 date=$1$2$3
 date_=$1-$2-$3
@@ -54,16 +55,19 @@ then
 		files=`ls -1 ${i}/ | wc -l`
 		if [ ! "$files" -eq "12" ];
 		then
-			continue
+			if [ ! "$files" -eq "4" ];
+			then
+				continue
+			fi
 		fi
 
 		if (( xcount > 500 ));
 		then
 			# Stop if we hit blackness after min 500 frames
-			b1=`identify -format "%[mean]" ${i}/000_000_1.png`
-			b2=`identify -format "%[mean]" ${i}/001_000_1.png`
-			b3=`identify -format "%[mean]" ${i}/000_001_1.png`
-			b4=`identify -format "%[mean]" ${i}/001_001_1.png`
+			b1=`identify -format "%[mean]" ${i}/000_000_2.png`
+			b2=`identify -format "%[mean]" ${i}/001_000_2.png`
+			b3=`identify -format "%[mean]" ${i}/000_001_2.png`
+			b4=`identify -format "%[mean]" ${i}/001_001_2.png`
 			wait
 			btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
 			if (( btotal < 200 ));
@@ -87,35 +91,40 @@ then
 			for y in {000..001..1};
 			do
 				this=${x}_${y}
-				# Make green image
-				# 1 - 45% blue
-				# 2 - 45% red
-				# 3 - 10% veggie
-				# http://cimss.ssec.wisc.edu/goes/OCLOFactSheetPDFs/ABIQuickGuide_CIMSSRGB_v2.pdf
-				magick convert \
-					${this}_1.png \
-					-write mpr:mainblue \
-					+delete \
-					${this}_2.png \
-					-write mpr:mainred \
-					+delete \
-					${this}_3.png \
-					-write mpr:maingreen \
-					+delete \
-					-respect-parentheses \
-					 \( mpr:mainblue  -level 0,222.222%    +write mpr:45blue   \) \
-					 \( mpr:mainred   -level 0,222.222%    +write mpr:45red    \) \
-					 \( mpr:maingreen -level 0,1000%       +write mpr:10veg    \) \
-					 \( -composite -compose plus mpr:45red mpr:10veg +write mpr:VR       \) \
-					 \( -composite -compose plus mpr:VR mpr:45blue +write mpr:green       \) \
-					 \( mpr:mainred mpr:green mpr:mainblue -combine +write PNG24:${this}.png \) \
-					null: &
+				if [ "$enable_colour" = true ];
+				then
+					# Make green image
+					# 1 - 45% blue
+					# 2 - 45% red
+					# 3 - 10% veggie
+					# http://cimss.ssec.wisc.edu/goes/OCLOFactSheetPDFs/ABIQuickGuide_CIMSSRGB_v2.pdf
+					magick convert \
+						${this}_1.png \
+						-write mpr:mainblue \
+						+delete \
+						${this}_2.png \
+						-write mpr:mainred \
+						+delete \
+						${this}_3.png \
+						-write mpr:maingreen \
+						+delete \
+						-respect-parentheses \
+						 \( mpr:mainblue  -level 0,222.222%    +write mpr:45blue   \) \
+						 \( mpr:mainred   -level 0,222.222%    +write mpr:45red    \) \
+						 \( mpr:maingreen -level 0,1000%       +write mpr:10veg    \) \
+						 \( -composite -compose plus mpr:45red mpr:10veg +write mpr:VR       \) \
+						 \( -composite -compose plus mpr:VR mpr:45blue +write mpr:green       \) \
+						 \( mpr:mainred mpr:green mpr:mainblue -combine +write PNG24:${this}.png \) \
+						null: &
+				else
+					mv ${this}_2.png ${this}.png
+				fi
 			done
 		done
 		wait
-		rm *_1.png &
-		rm *_2.png &
-		rm *_3.png &
+		rm -rf *_1.png &
+		rm -rf *_2.png &
+		rm -rf *_3.png &
 		wait
 		
 		diff2=$(((current_t)-(previous_t)))
@@ -139,7 +148,7 @@ then
 					counter=$(printf %06d $xcount);
 					for f in ./*; do
 						fname=${f##*/}
-						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean ../${tmpname}_${counter}_${fname} &
+						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean -remap $f PNG8:../${tmpname}_${counter}_${fname} &
 					done
 					timefunc " ${current:0:4}-${current:4:2}-${current:6:2} ${current:8:2}:${current:10:2} UTC (Interpolate)\nGOES-${5} Mesoscale ${4}"
 					xcount=$(($xcount+1));

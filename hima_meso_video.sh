@@ -11,6 +11,7 @@ enable_vid=true
 enable_join=false
 time_diff=150
 time_tol=5
+enable_colour=false
 
 date=$1$2$3
 date_=$1-$2-$3
@@ -56,16 +57,19 @@ then
 		files=`ls -1 ${i}/ | wc -l`
 		if [ ! "$files" -eq "12" ];
 		then
-			continue
+			if [ ! "$files" -eq "4" ];
+			then
+				continue
+			fi
 		fi
 
 		if (( xcount > 200 ));
 		then
 			# Stop if we hit blackness after min 200 frames
-			b1=`identify -format "%[mean]" ${i}/000_000_1.png`
-			b2=`identify -format "%[mean]" ${i}/001_000_1.png`
-			b3=`identify -format "%[mean]" ${i}/000_001_1.png`
-			b4=`identify -format "%[mean]" ${i}/001_001_1.png`
+			b1=`identify -format "%[mean]" ${i}/000_000_3.png`
+			b2=`identify -format "%[mean]" ${i}/001_000_3.png`
+			b3=`identify -format "%[mean]" ${i}/000_001_3.png`
+			b4=`identify -format "%[mean]" ${i}/001_001_3.png`
 			wait
 			btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
 			if (( btotal < 200 ));
@@ -76,7 +80,7 @@ then
 			then
 				echo ${current} - 30 blacks detected - break
 				break
-			fi		
+			fi
 		fi
 		
 		rm -rf /tmp/${tmpname}_video/*	
@@ -89,13 +93,18 @@ then
 			for y in {000..001..1};
 			do
 				this=${x}_${y}
-				magick convert ${this}_3.png ${this}_2.png ${this}_1.png -combine PNG24:${this}.png &
+				if [ "$enable_colour" = true ];
+				then
+					magick convert ${this}_3.png ${this}_2.png ${this}_1.png -combine PNG24:${this}.png &
+				else
+					mv ${this}_3.png ${this}.png
+				fi
 			done
 		done
 		wait
-		rm *_1.png &
-		rm *_2.png &
-		rm *_3.png &
+		rm -rf *_1.png &
+		rm -rf *_2.png &
+		rm -rf *_3.png &
 		wait
 		
 		diff2=$(((current_t)-(previous_t)))
@@ -119,7 +128,7 @@ then
 					counter=$(printf %06d $xcount);
 					for f in ./*; do
 						fname=${f##*/}
-						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean ../${tmpname}_${counter}_${fname} &
+						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean -remap $f PNG8:../${tmpname}_${counter}_${fname} &
 					done
 					timefunc " ${current:0:4}-${current:4:2}-${current:6:2} ${current:8:2}:${current:10:2} UTC (Interpolate)\nHimawari Mesoscale"
 					xcount=$(($xcount+1));
