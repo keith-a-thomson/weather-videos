@@ -2,17 +2,12 @@ mkdir -p ${HOME}/uk_rain
 cd ${HOME}/uk_rain
 
 enable_curl=true
-
 base_url=https://max.nwstatic.co.uk/tiles3/
 
-#date2=`date +'%Y-%m-%d'`
-#date1=20171125
 date1=$1$2$3
 date2=$1-$2-$3
 
-echo ukr-$date2
 mkdir -p $date2
-
 cd $date2
 
 # Full zoom
@@ -23,13 +18,12 @@ curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs --show-er
 
 cd ..
 
-echo "Missing"
 uk_rain_missing.sh $1 $2 $3 $4 $5
-cd $date2
-echo "Find"
-find  -type f -size -2k | xargs file | grep -v PNG 
+#cd $date2
+#echo "Find"
+#find  -type f -size -2k | xargs file | grep -v PNG 
 # cut -d ':' -f 1 | xargs -r rm
-cd ..
+#cd ..
 
 
 # Background image

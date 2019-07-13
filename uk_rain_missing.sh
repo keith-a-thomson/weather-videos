@@ -6,10 +6,9 @@ base_url=https://max.nwstatic.co.uk/tiles3/
 date1=$1$2$3
 date2=$1-$2-$3
 
-echo ukr-$date2
 mkdir -p $date2
-
 cd $date2
+
 for hour in $(seq -w $4 $5)
 do
 	for min in {00..55..5}
