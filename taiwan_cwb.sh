@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir -p ${HOME}/taiwan_cwb/radar/
 mkdir -p ${HOME}/taiwan_cwb/temperature/
 mkdir -p ${HOME}/taiwan_cwb/precip1/
