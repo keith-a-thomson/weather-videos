@@ -17,14 +17,14 @@ mkdir -p ${HOME}/${5}_meso_0${4}_ir
 cd ${HOME}/${5}_meso_0${4}_ir
 
 enable_curl=true
-base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
+base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
 
 echo -n "${5}ir0${4}-$date2"
 mkdir -p ${date2}
 
-curllist=`curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/${data}/mesoscale_0${4}/band_13/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
+curllist=`curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/${data}/mesoscale_0${4}/band_13/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
 while read line; do
 	if [ ! -d ${date2}/${line} ]
 	then

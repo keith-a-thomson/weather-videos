@@ -8,14 +8,14 @@ mkdir -p ${HOME}/goes_${4}_conus
 cd ${HOME}/goes_${4}_conus
 
 enable_curl=true
-base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
+base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
  
 echo -n g${4}c-$date2
 mkdir -p $date2
 
-curllist=`curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/goes-${4}/conus/geocolor/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
+curllist=`curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/goes-${4}/conus/geocolor/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
 while read line; do
 	if [ ! -d ${date2}/${line} ]
 	then

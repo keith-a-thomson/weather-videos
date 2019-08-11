@@ -8,7 +8,7 @@ mkdir -p ${HOME}/goes_${5}_meso_0${4}
 cd ${HOME}/goes_${5}_meso_0${4}
 
 enable_curl=true
-base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
+base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
 enable_colour=false
@@ -16,11 +16,11 @@ enable_colour=false
 echo -n g${5}m0${4}-$date2
 mkdir -p $date2
 
-curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
+curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
 if [ "$enable_colour" = true ];
 then
-	curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
-	curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
+	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
+	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/goes-${5}/mesoscale_0${4}/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
 	cat ${date2}/tmp1.txt ${date2}/tmp2.txt | sort -n | uniq -d > ${date2}/tmp12.txt
 	cat ${date2}/tmp12.txt ${date2}/tmp3.txt | sort -n | uniq -d > ${date2}/times.txt
 	rm ${date2}/tmp1.txt

@@ -20,7 +20,7 @@ base_radar=https://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/
 base_temp=https://www.cwb.gov.tw/V7/observe/temperature/Data/
 base_precip=https://www.cwb.gov.tw/V7e/observe/rainfall/Data/
 base_hima=https://www.cwb.gov.tw/V7/observe/satellite/Data/syo/
-base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
+base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 
 date1=`TZ=GMT+24 date +%Y%m%d`
 date2=`TZ=GMT+24 date +%Y-%m-%d`

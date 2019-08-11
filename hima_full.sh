@@ -2,14 +2,14 @@ mkdir -p ${HOME}/hima_full
 cd ${HOME}/hima_full
 
 enable_curl=true
-base_url_him=http://rammb-slider.cira.colostate.edu/data/imagery/
+base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
 
 echo -n hf-$date2
 mkdir -p $date2
 
-curllist=`curl -s -H  'User-Agent: Test' http://rammb-slider.cira.colostate.edu/data/json/himawari/full_disk/geocolor/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
+curllist=`curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/full_disk/geocolor/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
 while read line; do
 	if [ ! -d ${date2}/${line} ]
 	then
