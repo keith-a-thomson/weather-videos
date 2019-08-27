@@ -11,40 +11,52 @@ enable_curl=true
 base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
+chunksize=20
 
-echo -n g${4}f-$date2
+echo -ne "\rg${4}f-$date2"
 mkdir -p $date2
 
+exec 200>${HOME}/locks/goes_${4}_full_${date2}_lock 
+flock -xn 200 || exit 1
+
 curllist=`curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/goes-${4}/full_disk/geocolor/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
+ARRINDEX=0
+declare -a DATEARRAY
 while read line; do
 	if [ ! -d ${date2}/${line} ]
 	then
-		datelist=${datelist},${line}
+		DATEARRAY[$ARRINDEX]=${line}
+		ARRINDEX=$(( $ARRINDEX + 1 ))
 	fi
 done <<< "${curllist}"
-# Remove first ,
-datelist="${datelist:1}"
 
 if [ "$enable_curl" = true ];
 then
 	counter=0
-	if [ ! "${datelist}" = "" ]
+	if (( ARRINDEX > 0 ));
 	then
 		mkdir -p download/${date2}
 		rm -rf download/${date2}/*
 		url=${base_url_him}${date1}/goes-${4}---full_disk
-		curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/geocolor/{${datelist}}/02/[000-003]_[000-003].png -o download/${date2}/#1/#2_#3.png
-
-		for i in download/${date2}/20*;
+		for((arridx=0; arridx < ${#DATEARRAY[@]}; arridx+=$chunksize))
 		do
-			files=`ls -1 ${i}/ | wc -l`
-			if [ "$files" -eq "16" ]
-			then
-				mv ${i} ${date2}/
-				counter=$((counter+1))
-			fi
+			arraypart=( "${DATEARRAY[@]:arridx:chunksize}")
+			chunk=`echo ${arraypart[*]}| tr ' ' ,`
+			
+			curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/geocolor/{${chunk}}/02/[000-003]_[000-003].png -o download/${date2}/#1/#2_#3.png
+
+			for i in download/${date2}/20*;
+			do
+				files=`ls -1 ${i}/ | wc -l`
+				if [ "$files" -eq "16" ]
+				then
+					mv ${i} ${date2}/
+					counter=$((counter+1))
+				fi
+			done
+			echo -ne "\rg${4}f-$date2\t`ls -1 ${date2} | wc -l` (+${counter})"
+			rm -rf download/${date2}
 		done
-		rm -rf download/${date2}
 	fi
 	echo -e "\rg${4}f-$date2\t`ls -1 ${date2} | wc -l` (+${counter})"
 fi
