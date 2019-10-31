@@ -24,11 +24,11 @@ date1=$1$2$3
 date2=$1-$2-$3
 
 rm -f radar.txt precip1.txt precip2.txt temp.txt him.txt
-txtfunc "radar/${date2}/*.png" radar.txt
-txtfunc "precip1/${date2}/*.jpg" precip1.txt
-txtfunc "precip2/${date2}/*.jpg" precip2.txt
-txtfunc "temperature/${date2}/*.jpg" temp.txt
-txtfunc "himawari/${date2}/*.png" him.txt
+txtfunc "${date2}/radar/*.png" radar.txt
+txtfunc "${date2}/precip1/*.jpg" precip1.txt
+txtfunc "${date2}/precip2/*.jpg" precip2.txt
+txtfunc "${date2}/temperature/*.jpg" temp.txt
+txtfunc "${date2}/himawari/*.png" him.txt
 
 ffmpeg \
 	-f concat -safe 0 -r 24 -i radar.txt \
