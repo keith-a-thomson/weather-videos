@@ -1,3 +1,4 @@
+#!/bin/bash
 mkdir -p ${HOME}/uk_rain
 cd ${HOME}/uk_rain
 
