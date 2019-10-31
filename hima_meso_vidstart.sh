@@ -21,15 +21,15 @@ do
 	fi
 #	echo "i=$i"	
 	files=`ls -1 ${current}/ | wc -l`
-	if [ ! "$files" -eq "12" ];
+	if [ ! "$files" -eq "4" ];
 	then
 		continue
 	else
 		cd ${current}
-		b1=`identify -format "%[mean]" 000_000_1.png`
-		b2=`identify -format "%[mean]" 001_000_1.png`
-		b3=`identify -format "%[mean]" 000_001_1.png`
-		b4=`identify -format "%[mean]" 001_001_1.png`
+		b1=`identify -format "%[mean]" 000_000_3.png`
+		b2=`identify -format "%[mean]" 001_000_3.png`
+		b3=`identify -format "%[mean]" 000_001_3.png`
+		b4=`identify -format "%[mean]" 001_001_3.png`
 		btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
 #		echo "btot=$btotal"
 		if (( btotal > 600 ));
