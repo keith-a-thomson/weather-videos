@@ -48,9 +48,9 @@ then
 	# HIMAWARE in UTC
 	# So we need yesterday from 16:00 til 23:59
 	# Today from 00:00 til 15:59
-	curl  -H 'User-Agent: Test' \
+	curl -L -H 'User-Agent: Test' \
 ${base_url_him}${date_yesterday}/himawari---full_disk/geocolor/${date_yesterday}[16-23][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date_yesterday}#1#2.png
-        curl  -H 'User-Agent: Test' \
+        curl -L -H 'User-Agent: Test' \
 ${base_url_him}${date1}/himawari---full_disk/geocolor/${date1}[00-15][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date1}#1#2.png
 
 

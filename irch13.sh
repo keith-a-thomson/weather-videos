@@ -28,7 +28,7 @@ mkdir -p ${date2}
 exec 200>${HOME}/locks/${5}_meso_0${4}_ir_${date2}_lock 
 flock -xn 200 || exit 1
 
-curllist=`curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/${data}/mesoscale_0${4}/band_13/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
+curllist=`curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/${data}/mesoscale_0${4}/band_13/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' | sort -n`
 ARRINDEX=0
 declare -a DATEARRAY
 while read line; do
@@ -53,7 +53,7 @@ then
 			arraypart=( "${DATEARRAY[@]:arridx:chunksize}")
 			chunk=`echo ${arraypart[*]}| tr ' ' ,`
 			
-			curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_13/{${chunk}}/00/000_000.png -o download/${date2}/#1/000_000.png
+			curl -L -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_13/{${chunk}}/00/000_000.png -o download/${date2}/#1/000_000.png
 
 			for i in download/${date2}/20*;
 			do

@@ -14,11 +14,11 @@ mkdir -p $date2
 exec 200>${HOME}/locks/hima_meso_01_${date2}_lock 
 flock -xn 200 || exit 1
 
-curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
+curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
 if [ "${enable_colour}" = true ];
 then
-	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
-	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
+	curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
+	curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/mesoscale_01/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
 
 	cat ${date2}/tmp1.txt ${date2}/tmp2.txt | sort -n | uniq -d > ${date2}/tmp12.txt
 	cat ${date2}/tmp12.txt ${date2}/tmp3.txt | sort -n | uniq -d > ${date2}/times.txt
@@ -57,9 +57,9 @@ then
 			
 			if [ "${enable_colour}" = true ];
 			then
-				curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_0[1-3]/{${chunk}}/01/[000-001]_[000-001].png -o download/${date2}/#2/#3_#4_#1.png
+				curl -L -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_0[1-3]/{${chunk}}/01/[000-001]_[000-001].png -o download/${date2}/#2/#3_#4_#1.png
 			else
-				curl -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_03/{${chunk}}/01/[000-001]_[000-001].png -o download/${date2}/#1/#2_#3_3.png
+				curl -L -f -s --retry 5 --retry-delay 5 --retry-max-time 60 --create-dirs -H 'User-Agent: Test' $url/band_03/{${chunk}}/01/[000-001]_[000-001].png -o download/${date2}/#1/#2_#3_3.png
 			fi
 
 			for i in download/${date2}/20*;

@@ -14,11 +14,11 @@ mkdir -p $date2
 exec 200>${HOME}/locks/hima_japan_${date2}_lock 
 flock -xn 200 || exit 1
 
-curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
+curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_03/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp3.txt
 if [ "${enable_colour}" = true ];
 then
-	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
-	curl -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
+	curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_01/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp1.txt
+	curl -L -s -H  'User-Agent: Test' https://rammb-slider.cira.colostate.edu/data/json/himawari/japan/band_02/${date1}_by_hour.json | jq -r '.timestamps_int | .[] | .[]' > ${date2}/tmp2.txt
 
 	cat ${date2}/tmp1.txt ${date2}/tmp2.txt | sort -n | uniq -d > ${date2}/tmp12.txt
 	cat ${date2}/tmp12.txt ${date2}/tmp3.txt | sort -n | uniq -d > ${date2}/times.txt
@@ -56,9 +56,9 @@ then
 			chunk=`echo ${arraypart[*]}| tr ' ' ,`
 			if [ "${enable_colour}" = true ];
 			then
-				curl -f -s --create-dirs -H 'User-Agent: Test' $url/band_0[1-3]/{${chunk}}/02/[000-003]_[000-003].png -o download/${date2}/#2/#3_#4_#1.png
+				curl -L -f -s --create-dirs -H 'User-Agent: Test' $url/band_0[1-3]/{${chunk}}/02/[000-003]_[000-003].png -o download/${date2}/#2/#3_#4_#1.png
 			else
-				curl -f -s --create-dirs -H 'User-Agent: Test' $url/band_03/{${chunk}}/02/[000-003]_[000-003].png -o download/${date2}/#1/#2_#3_3.png
+				curl -L -f -s --create-dirs -H 'User-Agent: Test' $url/band_03/{${chunk}}/02/[000-003]_[000-003].png -o download/${date2}/#1/#2_#3_3.png
 			fi
 
 			for i in download/${date2}/20*;
