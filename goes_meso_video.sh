@@ -180,11 +180,11 @@ if [ "$enable_vid" = true ]
 then
 	#
 	ffmpeg -hide_banner -f image2 \
-		-framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_000.png' \
-		-framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_000.png' \
-		-framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_001.png' \
-		-framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_001.png' \
-		-framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_time.png' \
+		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_000.png' \
+		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_000.png' \
+		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_001.png' \
+		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_001.png' \
+		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_time.png' \
 		-filter_complex "[0:v][1:v]vstack=inputs=2[row1];\
 						 [2:v][3:v]vstack=inputs=2[row2];\
 						 [row1][row2]hstack=inputs=2[v2];\
@@ -192,9 +192,9 @@ then
 						 [v3][4:v]overlay=y=1000[v]" \
 		-shortest \
 		-map "[v]" \
-		-r 24 \
+		-r 60 \
 		-vcodec libx265 \
-		-crf 0 -pix_fmt yuv420p -preset ultrafast \
+		-crf 10 -pix_fmt yuv420p -preset ultrafast \
 		${date}_goes_${5}_mesoscale0${4}.mp4
 fi
 rm -rf /tmp/${tmpname}*

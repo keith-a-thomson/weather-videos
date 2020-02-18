@@ -42,7 +42,7 @@ ffmpeg \
 	-vcodec libx265 \
 	-movflags +faststart \
 	-pix_fmt yuv420p \
-	-crf 0 -preset slow \
+	-crf 10 -preset slow \
 	-r 24 \
 	${date1}_radar.mp4
 

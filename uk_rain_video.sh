@@ -113,8 +113,8 @@ then
 								[64:v][full]overlay[main];[main][65:v]overlay[q];[q][66:v]overlay[r];\
 								[r]crop=in_w:in_h-200[v]" \
 				-map "[v]" -shortest \
-				-vcodec libx264 \
-				-crf 20 -pix_fmt yuv420p -preset fast \
+				-vcodec libx265 \
+				-crf 10 -pix_fmt yuv420p -preset ultrafast \
 				-r 24 \
 	        ${date}_uk_rain.mp4
 fi

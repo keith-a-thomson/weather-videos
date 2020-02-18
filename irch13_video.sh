@@ -131,10 +131,10 @@ if [ "$enable_vid" = true ]
 then
 	cd ${HOME}/${5}_meso_0${4}_ir
 	ffmpeg -f image2 \
-	        -framerate 24 -i 'C:\cygwin64\tmp\'${tmpname}'\'${tmpname}'_%06d_000_000.png' \
-	        -r 24 \
+	        -framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'\'${tmpname}'_%06d_000_000.png' \
+	        -r 60 \
 		-vcodec libx265 \
-		-crf 0 -pix_fmt yuv420p -preset ultrafast \
+		-crf 10 -pix_fmt yuv420p -preset ultrafast \
 		${date}_${5}_meso_0${4}_ir.mp4
 fi
 rm -rf /tmp/${tmpname}/*

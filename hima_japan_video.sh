@@ -191,7 +191,7 @@ then
 			-map "[v]" \
 			-r 24 \
 			-vcodec libx265 \
-			-crf 0 -pix_fmt yuv420p -preset ultrafast \
+			-crf 10 -pix_fmt yuv420p -preset ultrafast \
 			${date}_himawari_japan.mp4
 fi
 rm -rf /tmp/${tmpname}*

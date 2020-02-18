@@ -165,10 +165,10 @@ then
                 -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_006.png' \
                 -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_006.png' \
                 -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_007.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_007.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_007.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_007.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_007.png' \
+				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_007.png' \
+				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_007.png' \
+				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_007.png' \
+				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_007.png' \
                 -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_007.png' \
 	        -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v]vstack=inputs=6[col1];\
 	                         [6:v][7:v][8:v][9:v][10:v][11:v]vstack=inputs=6[col2];\
@@ -176,14 +176,14 @@ then
 	                         [18:v][19:v][20:v][21:v][22:v][23:v]vstack=inputs=6[col4];\
 	                         [24:v][25:v][26:v][27:v][28:v][29:v]vstack=inputs=6[col5];\
 	                         [30:v][31:v][32:v][33:v][34:v][35:v]vstack=inputs=6[col6];\
-                                 [36:v][37:v][38:v][39:v][40:v][41:v]vstack=inputs=6[col7];\
-                                 [42:v][43:v][44:v][45:v][46:v][47:v]vstack=inputs=6[col8];\
+                             [36:v][37:v][38:v][39:v][40:v][41:v]vstack=inputs=6[col7];\
+                             [42:v][43:v][44:v][45:v][46:v][47:v]vstack=inputs=6[col8];\
 	                         [col1][col2][col3][col4][col5][col6][col7][col8]hstack=inputs=8[full];\
 	                         [full]scale=3840:-1[h];\
 	                         [h]crop=3840:2160[v]" \
 	        -map "[v]" -shortest \
                 -vcodec libx265 \
-                -crf 0 -pix_fmt yuv420p -preset ultrafast \
+                -crf 10 -pix_fmt yuv420p -preset ultrafast \
 	        -r 24 \
 	        ${date}_goes_${4}_conus.mp4
 fi
