@@ -35,7 +35,7 @@ mkdir -p $date2/himawari
 
 if [ "$enable_curl" = true ];
 then
-	curl ${base_radar}CV1_TW_3600_${date1}[00-23][00-50:10].png -o ${date2}/radar/CV1_TW_3600_${date1}#1#2.png
+	#curl ${base_radar}CV1_TW_3600_${date1}[00-23][00-50:10].png -o ${date2}/radar/CV1_TW_3600_${date1}#1#2.png
 	curl ${base_temp}${date2}_[00-23][00-00].GTP8.jpg            -o ${date2}/temperature/${date2}_#1#2.GTP8.jpg
 	#curl ${base_precip}${date2}_[00-23][00-30:30].EZT.jpg       -o ${date2}/precip_hour/${date2}_#1#2.EZT.jpg
 	curl ${base_precip}${date2}_[00-23][00-30:30].QZJ8.jpg       -o ${date2}/precip1/${date2}_#1#2.QZJ8.jpg
