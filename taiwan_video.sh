@@ -37,7 +37,7 @@ ffmpeg \
 	-f concat -safe 0 -r 4 -i temp.txt \
 	-f concat -safe 0 -r 24 -i him.txt \
 	-filter_complex \
-	"[0:v]scale=-1:1080,pad=1920:ih[t],[t][4]overlay=1080[p],[p][1]overlay=1120:680[q],[q][2]overlay=1520:680[r],[r][3]overlay=1520:280[out]" \
+	"[0:v]scale=-1:1080,pad=1920:ih[t],[1]scale=400:-1[s1],[2]scale=400:-1[s2],[3]scale=400:-1[s3],[t][4]overlay=1080[p],[p][s1]overlay=1120:680[q],[q][s2]overlay=1520:680[r],[r][s3]overlay=1520:280[out]" \
 	-map "[out]" \
 	-vcodec libx265 \
 	-movflags +faststart \

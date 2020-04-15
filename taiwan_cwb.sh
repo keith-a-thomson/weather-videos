@@ -10,9 +10,9 @@ enable_gdrive=false
 
 curl_opts="--silent --show-error"
 
-base_radar=https://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/
-base_temp=https://www.cwb.gov.tw/V7/observe/temperature/Data/
-base_precip=https://www.cwb.gov.tw/V7e/observe/rainfall/Data/
+base_radar=https://www.cwb.gov.tw/Data/radar/
+base_temp=https://www.cwb.gov.tw/Data/temperature/
+base_precip=https://www.cwb.gov.tw/Data/rainfall/
 base_hima=https://www.cwb.gov.tw/V7/observe/satellite/Data/syo/
 base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 
@@ -30,16 +30,16 @@ mkdir -p $date2/radar
 mkdir -p $date2/temperature
 mkdir -p $date2/precip1
 mkdir -p $date2/precip2
-mkdir -p $date2/precip_hour
+#mkdir -p $date2/precip_hour
 mkdir -p $date2/himawari
 
 if [ "$enable_curl" = true ];
 then
 	curl ${base_radar}CV1_TW_3600_${date1}[00-23][00-50:10].png -o ${date2}/radar/CV1_TW_3600_${date1}#1#2.png
-	curl ${base_temp}${date2}_[00-23][00-00].GTP.jpg            -o ${date2}/temperature/${date2}_#1#2.GTP.jpg
-	curl ${base_precip}${date2}_[00-23][00-30:30].EZT.jpg       -o ${date2}/precip_hour/${date2}_#1#2.EZT.jpg
-	curl ${base_precip}${date2}_[00-23][00-30:30].EZJ.jpg       -o ${date2}/precip1/${date2}_#1#2.EZJ.jpg
-	curl ${base_precip}${date2}_[00-23][00-30:30].EZJ.grd2.jpg  -o ${date2}/precip2/${date2}_#1#2.EZJ.grd2.jpg
+	curl ${base_temp}${date2}_[00-23][00-00].GTP8.jpg            -o ${date2}/temperature/${date2}_#1#2.GTP8.jpg
+	#curl ${base_precip}${date2}_[00-23][00-30:30].EZT.jpg       -o ${date2}/precip_hour/${date2}_#1#2.EZT.jpg
+	curl ${base_precip}${date2}_[00-23][00-30:30].QZJ8.jpg       -o ${date2}/precip1/${date2}_#1#2.QZJ8.jpg
+	curl ${base_precip}${date2}_[00-23][00-30:30].QZJ8.grd2.jpg  -o ${date2}/precip2/${date2}_#1#2.QZJ8.grd2.jpg
 fi
 
 if [ "$enable_curl2" = true ];
