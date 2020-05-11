@@ -36,7 +36,7 @@ do
 		fi
 	fi
 	
-	if [ ! -f ../x265_crf25_${file}_$1$2.mp4 ];
+	if [ ! -f x265_crf20_${file}_$1$2.mp4 ];
 	then
 		$encode ${file}_$1$2.mp4
 	fi
