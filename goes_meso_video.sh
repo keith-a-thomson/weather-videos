@@ -53,9 +53,9 @@ then
 
 		# Sanity check the directory
 		files=`ls -1 ${i}/ | wc -l`
-		if [ ! "$files" -eq "12" ];
+		if [ ! "$files" -eq "4" ];
 		then
-			if [ ! "$files" -eq "4" ];
+			if [ ! "$files" -eq "12" ];
 			then
 				continue
 			fi

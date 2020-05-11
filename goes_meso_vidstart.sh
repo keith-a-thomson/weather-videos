@@ -7,17 +7,16 @@ cd ${date_}
 inblack=false
 blackcount=0
 nonblack=0
+
 for i in ./*;    
 do 
-#	echo "i=$i"
-
 	current=${i:2}
 	current_t=$(date -d "${current:0:8} ${current:8:2}:${current:10:2}:${current:12:2}" +'%s')
 
 	files=`ls -1 ${current}/ | wc -l`
-	if [ ! "$files" -eq "12" ];
+	if [ ! "$files" -eq "4" ];
 	then
-		if [ ! "$files" -eq "4" ];
+		if [ ! "$files" -eq "12" ];
 		then
 			continue
 		fi
@@ -28,6 +27,7 @@ do
 	b3=`identify -format "%[mean]" 000_001_2.png`
 	b4=`identify -format "%[mean]" 001_001_2.png`
 	btotal=$(awk "BEGIN {printf(\"%.0f\n\", ${b1} + ${b2} + ${b3} + ${b4}); exit}")
+	
 	if (( btotal > 200 ));
 	then
 		# We have a non-black image
@@ -56,6 +56,12 @@ do
 			inblack=true
 		fi
 	fi
+	#echo "i=$i";
+	#echo $btotal
+	#echo start=$start
+	#echo inback=$inblack
+	#echo blackcount=$blackcount
+	#echo nonblack=$nonblack
 	cd ..
 done
 cd ..
