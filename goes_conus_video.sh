@@ -8,6 +8,7 @@ fi
 cd ${HOME}/goes_${4}_conus/
 pwd
 
+tdir=/tmp/
 enable_vid=true
 enable_join=false
 
@@ -50,7 +51,7 @@ do
 				for f in $current/*;
 				do
 					fname=${f##*/}
-					magick ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+					convert ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
 				done
 				xcount=$(($xcount+1));
 			fi
@@ -61,7 +62,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -69,7 +70,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 			fi
@@ -80,7 +81,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname}  ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname}  ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -88,7 +89,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname}  ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname}  ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -96,7 +97,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} $f $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'goes${4}conus_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} $f $f $f -evaluate-sequence mean ${tdir}goes${4}conus_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
                         fi
@@ -122,54 +123,54 @@ echo "frame_count=${xcount}"
 if [ "$enable_vid" = true ]
 then
 	ffmpeg -f image2 \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_000.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_001.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_002.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_003.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_004.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_005.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_006.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_001_007.png' \
-				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_002_007.png' \
-				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_003_007.png' \
-				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_004_007.png' \
-				-framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_005_007.png' \
-                -framerate 24 -i 'C:\cygwin64\tmp\goes'${4}'conus_%06d_006_007.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_000.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_001.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_002.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_003.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_004.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_005.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_006.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_001_007.png' \
+				-framerate 24 -i ${tdir}'goes'${4}'conus_%06d_002_007.png' \
+				-framerate 24 -i ${tdir}'goes'${4}'conus_%06d_003_007.png' \
+				-framerate 24 -i ${tdir}'goes'${4}'conus_%06d_004_007.png' \
+				-framerate 24 -i ${tdir}'goes'${4}'conus_%06d_005_007.png' \
+                -framerate 24 -i ${tdir}'goes'${4}'conus_%06d_006_007.png' \
 	        -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v]vstack=inputs=6[col1];\
 	                         [6:v][7:v][8:v][9:v][10:v][11:v]vstack=inputs=6[col2];\
 	                         [12:v][13:v][14:v][15:v][16:v][17:v]vstack=inputs=6[col3];\

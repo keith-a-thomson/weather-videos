@@ -1,6 +1,7 @@
 cd ${HOME}/hima_full/
 pwd
 
+tdir=/tmp/
 enable_vid=true
 enable_join=false
 
@@ -50,7 +51,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick $f ../${previous_d}/${previous_i}/${fname} -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                        convert $f ../${previous_d}/${previous_i}/${fname} -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
                         fi
@@ -62,7 +63,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -70,7 +71,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
                         fi
@@ -82,11 +83,11 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} \
+                                        convert ../${previous_d}/${previous_i}/${fname} \
                                                ../${previous_d}/${previous_i}/${fname} \
                                                ../${previous_d}/${previous_i}/${fname} \
                                                 $f \
-                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                                -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -94,7 +95,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} ../${previous_d}/${previous_i}/${fname} $f $f -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -102,7 +103,7 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} $f $f $f -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                        convert ../${previous_d}/${previous_i}/${fname} $f $f $f -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
                         fi
@@ -114,12 +115,12 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} \
+                                        convert ../${previous_d}/${previous_i}/${fname} \
                                                ../${previous_d}/${previous_i}/${fname} \
                                                ../${previous_d}/${previous_i}/${fname} \
                                                ../${previous_d}/${previous_i}/${fname} \
                                                $f \
-                                               -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                               -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -127,12 +128,12 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} \
+                                        convert ../${previous_d}/${previous_i}/${fname} \
                                                 ../${previous_d}/${previous_i}/${fname} \
                                                 ../${previous_d}/${previous_i}/${fname} \
                                                 $f \
 						$f \
-                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                                -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -140,12 +141,12 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} \
+                                        convert ../${previous_d}/${previous_i}/${fname} \
                                                 ../${previous_d}/${previous_i}/${fname} \
                                                 $f \
 						$f \
 						$f \
-                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                                -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -153,12 +154,12 @@ do
                                 for f in $current/*;
                                 do
                                         fname=${f##*/}
-                                        magick ../${previous_d}/${previous_i}/${fname} \
+                                        convert ../${previous_d}/${previous_i}/${fname} \
                                                 $f \
 						$f \
 						$f \
 						$f \
-                                                -evaluate-sequence mean 'C:\cygwin64\tmp\'himawari_${counter}_${fname}
+                                                -evaluate-sequence mean ${tdir}himawari_${counter}_${fname}
                                 done
                                 xcount=$(($xcount+1));
 
@@ -184,22 +185,22 @@ echo "frame_count=${xcount}"
 if [ "$enable_vid" = true ]
 then
 	ffmpeg -f image2 \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_000_000.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_001_000.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_002_000.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_003_000.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_000_001.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_001_001.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_002_001.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_003_001.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_000_002.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_001_002.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_002_002.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_003_002.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_000_003.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_001_003.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_002_003.png' \
-	        -framerate 24 -i 'C:\cygwin64\tmp\himawari_%06d_003_003.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_000_000.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_001_000.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_002_000.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_003_000.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_000_001.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_001_001.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_002_001.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_003_001.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_000_002.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_001_002.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_002_002.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_003_002.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_000_003.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_001_003.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_002_003.png' \
+	        -framerate 24 -i ${tdir}'himawari_%06d_003_003.png' \
 	        -filter_complex "[0:v][1:v][2:v][3:v]vstack=inputs=4[row1];\
 	                         [4:v][5:v][6:v][7:v]vstack=inputs=4[row2];\
 	                         [8:v][9:v][10:v][11:v]vstack=inputs=4[row3];\

@@ -148,7 +148,7 @@ then
 					counter=$(printf %06d $xcount);
 					for f in ./*; do
 						fname=${f##*/}
-						magick `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean -remap $f PNG8:../${tmpname}_${counter}_${fname} &
+						convert `interpolate.sh $missing $newidx ../${tmpname}_${prevcounter}_${fname} $f` -evaluate-sequence mean -remap $f PNG8:../${tmpname}_${counter}_${fname} &
 					done
 					timefunc " ${current:0:4}-${current:4:2}-${current:6:2} ${current:8:2}:${current:10:2} UTC (Interpolate)\nGOES-${5} Mesoscale ${4}"
 					xcount=$(($xcount+1));
@@ -180,11 +180,11 @@ if [ "$enable_vid" = true ]
 then
 	#
 	ffmpeg -hide_banner -f image2 \
-		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_000.png' \
-		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_000.png' \
-		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_000_001.png' \
-		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_001_001.png' \
-		-framerate 60 -i 'C:\cygwin64\tmp\'${tmpname}'_%06d_time.png' \
+		-framerate 60 -i '/tmp/'${tmpname}'_%06d_000_000.png' \
+		-framerate 60 -i '/tmp/'${tmpname}'_%06d_001_000.png' \
+		-framerate 60 -i '/tmp/'${tmpname}'_%06d_000_001.png' \
+		-framerate 60 -i '/tmp/'${tmpname}'_%06d_001_001.png' \
+		-framerate 60 -i '/tmp/'${tmpname}'_%06d_time.png' \
 		-filter_complex "[0:v][1:v]vstack=inputs=2[row1];\
 						 [2:v][3:v]vstack=inputs=2[row2];\
 						 [row1][row2]hstack=inputs=2[v2];\
