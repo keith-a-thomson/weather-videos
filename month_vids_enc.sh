@@ -13,14 +13,15 @@ declare -a arr=(
 				"Himawari_Full,toh265_archive.sh"
 				"Goes_16_Meso_01_Vis,toh265_archive_60fps.sh" 
 				"Goes_16_Meso_02_Vis,toh265_archive_60fps.sh" 
-				"Goes_16_Meso_01_IR,toh265_archive_60fps.sh"
-				"Goes_16_Meso_02_IR,toh265_archive_60fps.sh"
+				#"Goes_16_Meso_01_IR,toh265_archive_60fps.sh"
+				#"Goes_16_Meso_02_IR,toh265_archive_60fps.sh"
 				"Goes_17_Meso_01_Vis,toh265_archive_60fps.sh"
 				"Goes_17_Meso_02_Vis,toh265_archive_60fps.sh"
 				"Himawari_Mesoscale,toh265_archive.sh" 
-				"Hima_Meso_01_IR,toh265_archive_60fps.sh"
+				#"Hima_Meso_01_IR,toh265_archive_60fps.sh"
 				"Himawari_Japan,toh265_archive.sh" 
 				"Taiwan_Weather,toh265_archive.sh"
+				"Uk_Rain,toh265_archive.sh"
 				)
 cd /cygdrive/e/vid
 for i in "${arr[@]}"
