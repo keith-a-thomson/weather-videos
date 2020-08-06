@@ -158,7 +158,7 @@ if [ -f ${HOME}/${type}/${file} ]; then
 	#echo "{\"playlistIds\":[\"${playlist}\"],\
 	echo "{\"description\":\"${description}\"}" > ${file}.json
 #	echo "/--------------"
-	./youtubeuploader_windows_amd64.exe \
+	./youtubeuploader_linux_amd64 \
 			-quiet \
 			-cache ${token} \
 			-categoryId 28 \
