@@ -7,6 +7,7 @@ tags=satellite,imagery,ocean,waves,wind,earth,sea,timelapse,clouds,typhoon,hurri
 title=
 description="Data scraped from http://rammb-slider.cira.colostate.edu"
 token=request.token
+playlist=
 
 if [ "$1" = "g16c" ]; then
 	type="goes_16_conus"
@@ -137,6 +138,30 @@ elif [ "$1" = "tcwb" ]; then
 	description="Data scraped from https://www.cwb.gov.tw/eng/"
 	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 	
+elif [ "$1" = "trcly" ]; then
+	type="taiwan_radar"
+	file=CV1_RCLY_1000_${year}${month}${day}.mp4
+	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
+	title="Taiwan Radar - 高雄林園 Kaohsiung Linyuan (RCLY) - $year/${month}/${day}"
+	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
+	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
+
+elif [ "$1" = "trcnt" ]; then
+	type="taiwan_radar"
+	file=CV1_RCNT_1000_${year}${month}${day}.mp4
+	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
+	title="Taiwan Radar - 臺中南屯 Taichung Nantun (RCNT) - $year/${month}/${day}"
+	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
+	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
+
+elif [ "$1" = "trcsl" ]; then
+	type="taiwan_radar"
+	file=CV1_RCSL_1000_${year}${month}${day}.mp4
+	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
+	title="Taiwan Radar - 新北樹林 New Taipei Shulin (RCSL) - $year/${month}/${day}"
+	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
+	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
+
 elif [ "$1" = "ukr" ]; then
 	type="uk_rain"
 	file=${year}${month}${day}_uk_rain.mp4
