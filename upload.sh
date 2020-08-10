@@ -161,6 +161,14 @@ elif [ "$1" = "trcsl" ]; then
 	title="Taiwan Radar - 新北樹林 New Taipei Shulin (RCSL) - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
 	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
+	
+elif [ "$1" = "trext" ]; then
+	type="taiwan_cwb"
+	file=CV1_1000_${year}${month}${day}.mp4
+	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
+	title="Taiwan Radar Extended Domain - $year/${month}/${day}"
+	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar.html"
+	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 
 elif [ "$1" = "ukr" ]; then
 	type="uk_rain"
