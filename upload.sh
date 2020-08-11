@@ -198,7 +198,7 @@ if [ -f ${HOME}/${type}/${file} ]; then
 			-filename ./${type}/x264_${file} \
 			-limitBetween 05:00-23:30 \
 			-privacy public \
-			-ratelimit 1800 \
+			-ratelimit 3000 \
 			-tags "${tags}" \
 			-title "${title}" \
 			-metaJSON ${file}.json > ${type}/${file}.upload
