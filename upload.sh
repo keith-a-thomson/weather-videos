@@ -136,7 +136,6 @@ elif [ "$1" = "tcwb" ]; then
 	tags="$tags,taiwan,cwb,rainfall,formosa,himawari,satellite,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
 	title="Taiwan Weather - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/eng/"
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 	
 elif [ "$1" = "trcly" ]; then
 	type="taiwan_radar"
@@ -144,7 +143,6 @@ elif [ "$1" = "trcly" ]; then
 	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
 	title="Taiwan Radar - 高雄林園 Kaohsiung Linyuan (RCLY) - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 
 elif [ "$1" = "trcnt" ]; then
 	type="taiwan_radar"
@@ -152,7 +150,6 @@ elif [ "$1" = "trcnt" ]; then
 	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
 	title="Taiwan Radar - 臺中南屯 Taichung Nantun (RCNT) - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 
 elif [ "$1" = "trcsl" ]; then
 	type="taiwan_radar"
@@ -160,7 +157,6 @@ elif [ "$1" = "trcsl" ]; then
 	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
 	title="Taiwan Radar - 新北樹林 New Taipei Shulin (RCSL) - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar_rain.html"
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 	
 elif [ "$1" = "trext" ]; then
 	type="taiwan_cwb"
@@ -168,7 +164,6 @@ elif [ "$1" = "trext" ]; then
 	tags="$tags,taiwan,cwb,rainfall,formosa,,taipei,tainan,kaohsiung,taichung,chiayi,hsinchu,keelung,yilan,hualien,taitung"
 	title="Taiwan Radar Extended Domain - $year/${month}/${day}"
 	description="Data scraped from https://www.cwb.gov.tw/V8/E/W/OBS_Radar.html"
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 
 elif [ "$1" = "ukr" ]; then
 	type="uk_rain"
@@ -177,14 +172,12 @@ elif [ "$1" = "ukr" ]; then
 	tags="uk,united kingdom,england,scotland,ireland,wales,rain,rainfall,radar,timelapse,britain,isles"
 	title="UK Rain Radar - $year/${month}/${day}"
 	description="Data scraped from https://www.netweather.tv/live-weather/radar \nBasemap is https://www.geofabrik.de/maps/rendering.html"
-	# Avoid re-encode at the moment
-	cp ${HOME}/${type}/${file} ${HOME}/${type}/x264_${file}
 fi
 
 if [ -f ${HOME}/${type}/${file} ]; then
 	cd ${HOME}/${type}
-	if [ ! -f x264_${file} ]; then
-		toh264.sh ${file}
+	if [ ! -f x265_${file} ]; then
+		toh265.sh ${file}
 	fi
 
 	cd ${HOME}
@@ -195,7 +188,7 @@ if [ -f ${HOME}/${type}/${file} ]; then
 			-quiet \
 			-cache ${token} \
 			-categoryId 28 \
-			-filename ./${type}/x264_${file} \
+			-filename ./${type}/x265_${file} \
 			-limitBetween 05:00-23:30 \
 			-privacy public \
 			-ratelimit 3000 \
@@ -205,5 +198,5 @@ if [ -f ${HOME}/${type}/${file} ]; then
 #	echo "\-------------"
 	echo
 	rm ${file}.json
-	rm ${type}/x264_${file}
+	rm ${type}/x265_${file}
 fi
