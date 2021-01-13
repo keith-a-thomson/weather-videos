@@ -11,7 +11,7 @@ enable_curl=true
 base_url_him=https://rammb-slider.cira.colostate.edu/data/imagery/
 date1=$1$2$3
 date2=$1-$2-$3
-chunksize=20
+chunksize=10
  
 echo -ne "\rg${4}c-$date2"
 mkdir -p $date2
