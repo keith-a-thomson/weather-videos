@@ -174,6 +174,14 @@ elif [ "$1" = "ukr" ]; then
 	description="Data scraped from https://www.netweather.tv/live-weather/radar \nBasemap is https://www.geofabrik.de/maps/rendering.html"
 fi
 
+elif [ "$1" = "cairn" ]; then
+	type="cairngorms"
+	file=${year}${month}${day}_cairngorms.mp4
+	tags="uk,united kingdom,scotland,cairngorms,glenshee,highlands,lecht,braemar,spittal,strathdon,cairn,mount,B974,A93,rain,rainfall,snow,snowgate,snowfall,ski,snowboard"
+	title="Glenshee / The Lecht / Snowgates - $year/${month}/${day}"
+	description="Images scraped from:\n https://www.snowgatecameras.co.uk/ \n https://www.lecht.co.uk \n https://www.ski-glenshee.co.uk \n https://www.pkc.gov.uk/trafficcameras"
+fi
+
 if [ -f ${HOME}/${type}/${file} ]; then
 	cd ${HOME}/${type}
 	if [ ! -f x265_${file} ]; then
