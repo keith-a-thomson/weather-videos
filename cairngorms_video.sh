@@ -4,13 +4,12 @@ txtfunc() {
 	cp $1.prev.jpg t_$1.prev.jpg # Copy the last image from yesterday to a temporary one
 	prev="t_$1.prev.jpg" # Use the previous stored version e.g. if no current image available
 
+	echo "Scanning ${name}"
 	#for hour in {00..23}
 	for hour in {14..21}
 	do
 		for minute in {00..59..5}
 		do
-			echo $name $hour - $minute
-
 			filename=${date}/${name}_${date2}_${hour}${minute}.jpg
 			type=`file ${filename} | grep -v "image data"`
 			if [ ! -f ${filename} ] || [ ! -z "$type" ];
@@ -55,9 +54,7 @@ do
 	rm -rf ${name}.txt
 	txtfunc ${name} ${name}.txt
 done
-#"[0:v]scale=-1:1080,pad=1920:ih[t],[1]scale=400:-1[s1],[2]scale=400:-1[s2],[3]scale=400:-1[s3],[t][4]overlay=1080[p],[p][s1]overlay=1120:680[q],[q][s2]overlay=1520:680[r],[r][s3]overlay=1520:280[out]"
 
-rm ${date2}_cairngorms.mp4
 ffmpeg \
 	-f concat -safe 0 -r 24 -i glenshee.txt \
 	-f concat -safe 0 -r 24 -i lecht.txt  \
