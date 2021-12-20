@@ -172,7 +172,6 @@ elif [ "$1" = "ukr" ]; then
 	tags="uk,united kingdom,england,scotland,ireland,wales,rain,rainfall,radar,timelapse,britain,isles"
 	title="UK Rain Radar - $year/${month}/${day}"
 	description="Data scraped from https://www.netweather.tv/live-weather/radar \nBasemap is https://www.geofabrik.de/maps/rendering.html"
-fi
 
 elif [ "$1" = "cairn" ]; then
 	type="cairngorms"
