@@ -5,8 +5,7 @@ txtfunc() {
 	prev="t_$1.prev.jpg" # Use the previous stored version e.g. if no current image available
 
 	echo "Scanning ${name}"
-	#for hour in {00..23}
-	for hour in {14..21}
+	for hour in {00..23}
 	do
 		for minute in {00..59..5}
 		do
@@ -47,6 +46,12 @@ declare -a arr=(
         #"sunkid"
         #"whitelady"
         #"fiacaill"
+		#"base"
+		#"cottams"
+		#"gunbarrel"
+		#"lowercarpark"
+		#"maincarpark"
+		#"zigzags"
 )
 
 for name in "${arr[@]}"
@@ -86,7 +91,7 @@ ffmpeg \
 	-pix_fmt yuv420p \
 	-crf 10 -preset slow \
 	-r 24 \
-	${date2}_cairngorms.mp4
+	${date2}_glenshee_lecht.mp4
 
 for name in "${arr[@]}"
 do
