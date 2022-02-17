@@ -54,7 +54,7 @@ then
 		mkdir -p download/${date2}
 		rm -rf download/${date2}/*
 		
-		url=${base_url_him}${date1}/goes-${5}---mesoscale_0${4}
+		url=${base_url_him}/$1/$2/$3/goes-${5}---mesoscale_0${4}
 
 		for((arridx=0; arridx < ${#DATEARRAY[@]}; arridx+=$chunksize))
 		do

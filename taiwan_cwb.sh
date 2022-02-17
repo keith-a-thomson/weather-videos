@@ -24,7 +24,7 @@ date1=$1$2$3
 date2=$1-$2-$3
 midnight=`date -d ${date2} +"%s"`
 yesterday_t=$((midnight-600))
-date_yesterday=`date -d @${yesterday_t} +'%Y%m%d'`
+date_yesterday=`date -d @${yesterday_t} +'%Y/%m/%d'`
 
 mkdir -p $date2/radar
 mkdir -p $date2/temperature
@@ -49,9 +49,9 @@ then
 	# So we need yesterday from 16:00 til 23:59
 	# Today from 00:00 til 15:59
 	curl -L -H 'User-Agent: Test' \
-${base_url_him}${date_yesterday}/himawari---full_disk/geocolor/${date_yesterday}[16-23][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date_yesterday}#1#2.png
+${base_url_him}${date_yesterday}/himawari---full_disk/geocolor/${date_yesterday}/[16-23][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date_yesterday}#1#2.png
         curl -L -H 'User-Agent: Test' \
-${base_url_him}${date1}/himawari---full_disk/geocolor/${date1}[00-15][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date1}#1#2.png
+${base_url_him}${date1}/himawari---full_disk/geocolor/${date1}/[00-15][00-50:10]00/04/004_005.png -o $date2/himawari/him_${date1}#1#2.png
 
 
 #	for hour in {16..23};

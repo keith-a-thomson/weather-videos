@@ -1,8 +1,13 @@
 #!/bin/bash
+source common.sh
+echo ${GLOBAL_CURL_OPTS}
+testfunc INPUT
 
 mkdir -p ${HOME}/taiwan_radar/
 cd ${HOME}/taiwan_radar/
 
+
+exit 0
 curl -s https://www.cwb.gov.tw/Data/js/obs_img/Observe_radar_rain.js | grep _1000 | cut -d "'" -f 2 > temp.js
 
 INDEX=0

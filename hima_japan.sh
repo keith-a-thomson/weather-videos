@@ -48,7 +48,7 @@ then
 	then
 		mkdir -p download/${date2}
 		rm -rf download/${date2}/*
-		url=${base_url_him}${date1}/himawari---japan
+		url=${base_url_him}/$1/$2/$3/himawari---japan
 
 		for((arridx=0; arridx < ${#DATEARRAY[@]}; arridx+=$chunksize))
 		do

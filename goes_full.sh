@@ -37,7 +37,7 @@ then
 	then
 		mkdir -p download/${date2}
 		rm -rf download/${date2}/*
-		url=${base_url_him}${date1}/goes-${4}---full_disk
+		url=${base_url_him}/$1/$2/$3/goes-${4}---full_disk
 		for((arridx=0; arridx < ${#DATEARRAY[@]}; arridx+=$chunksize))
 		do
 			arraypart=( "${DATEARRAY[@]:arridx:chunksize}")
